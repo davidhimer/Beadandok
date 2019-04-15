@@ -12,10 +12,7 @@ def todec(n):
         c = c / 2
     return int(dec)
     
-try:
-    be = input(str('Adja meg a számokat: '))
-except ValueError:
-    print('Nem jó a formátum!')
+be = input(str('Adja meg a számokat: '))
     
 ls = []
 
