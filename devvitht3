@@ -1,0 +1,29 @@
+def dev3(n):
+    if int(n) % 3 == 0:
+        return True
+    else:
+        return False
+    
+def todec(n):
+    dec = 0
+    c = pow(2,len(n)-1)
+    for j in range(0,len(n)):
+        dec += int(n[j]) * c
+        c = c / 2
+    return int(dec)
+    
+try:
+    be = input(str('Adja meg a számokat: '))
+except ValueError:
+    print('Nem jó a formátum!')
+    
+ls = []
+
+szamokbin = be.split(',')
+
+
+for n in range(0,len(szamokbin)):
+    if dev3(todec(szamokbin[n])):
+        ls.append(str(todec(szamokbin[n])) + ' : ' + szamokbin[n])
+
+print(ls)
