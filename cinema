@@ -1,0 +1,39 @@
+import numpy as np
+import re
+
+'''def foglal(a,b,c):
+    
+def modosit(a,b,c):
+    
+def töröl(a,b):'''
+
+def keres(a,b):
+    x = re.search(b.upper(),a)
+    return x
+    
+#def szabad(a):
+    
+
+a = np.full((40,100), 'X')
+while 1:
+    tev = input(str('Mit szeretne csinálni?\nFoglal(F), Töröl(T), Módosít(M), Megtekinti a foglalást(C), Kilép(X)\n'))
+    
+    if tev.upper() == 'F':
+        print('Szabad helyek:\n{}'.format(szabad(a)))
+        sit = int(input(str('Adja meg a foglni kívánt szék számát: ')))
+        mon = input(str('Adja meg a monogramját: '))
+        foglal(a,sit,mon)
+    elif tev.upper() == 'M':
+        mon = input(str('Adja meg a monogramját: '))
+        töröl(a,mon)
+        print('Szabad helyek:\n{}'.format(szabad(a)))
+        sit = int(input(str('Adja meg az új foglni kívánt szék számát: ')))
+        foglal(a,sit,mon)
+    elif tev.upper() == 'C':
+        mon = input(str('Adja meg a monogramját: '))
+        print('Az ön széke: {}'.format(keres(a,mon)))
+    elif tev.upper() == 'T':
+        mon = input(str('Adja meg a monogramját: '))
+        töröl(a,mon)
+    elif tev.upper() == 'X':
+        break
