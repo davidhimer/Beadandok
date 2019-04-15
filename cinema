@@ -5,35 +5,40 @@ import re
     
 def modosit(a,b,c):
     
-def töröl(a,b):'''
+def töröl(a,b):
+
+#def szabad(a):'''
 
 def keres(a,b):
-    x = re.search(b.upper(),a)
-    return x
-    
-#def szabad(a):
-    
+    if len(b) < 2 or len(b) > 3 or b[1] != ' ':
+        return 'Himás a monogramm!'
+    for i in range(0,100):
+        for j in range(2,42,2):
+            if a[i,j] == b[0].upper() and a[i,j + 1] == b[2].upper():
+                ls = []
+                return ls
 
 a = np.full((40,100), 'X')
+
 while 1:
     tev = input(str('Mit szeretne csinálni?\nFoglal(F), Töröl(T), Módosít(M), Megtekinti a foglalást(C), Kilép(X)\n'))
     
     if tev.upper() == 'F':
         print('Szabad helyek:\n{}'.format(szabad(a)))
         sit = int(input(str('Adja meg a foglni kívánt szék számát: ')))
-        mon = input(str('Adja meg a monogramját: '))
+        mon = input(str('Adja meg a monogramját szóközzel elválasztva: '))
         foglal(a,sit,mon)
     elif tev.upper() == 'M':
-        mon = input(str('Adja meg a monogramját: '))
+        mon = input(str('Adja meg a monogramját szóközzel elválasztva: '))
         töröl(a,mon)
         print('Szabad helyek:\n{}'.format(szabad(a)))
         sit = int(input(str('Adja meg az új foglni kívánt szék számát: ')))
         foglal(a,sit,mon)
     elif tev.upper() == 'C':
-        mon = input(str('Adja meg a monogramját: '))
+        mon = input(str('Adja meg a monogramját szóközzel elválasztva: '))
         print('Az ön széke: {}'.format(keres(a,mon)))
     elif tev.upper() == 'T':
-        mon = input(str('Adja meg a monogramját: '))
+        mon = input(str('Adja meg a monogramját szóközzel elválasztva: '))
         töröl(a,mon)
     elif tev.upper() == 'X':
         break
