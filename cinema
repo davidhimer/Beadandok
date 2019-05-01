@@ -5,8 +5,11 @@ def foglal(a,sor,szek,c):
     x = szekek[szek]
     while 1: 
         if a[sor-1][x] != 'X':
-            print('A választott szék már foglalt adjon meg egy másikat!')
+            print('A választott szék már foglalt adjon meg egy másikat!\n0 val megtekintheti a szabad székeket.')
             sor = int(input(str('Adja meg a sor számát: ')))
+            if sor == 0:
+                szabad(a)
+                sor = int(input(str('Adja meg a sor számát: ')))
             szek = int(input(str('Adja meg a foglni kívánt szék számát: ')))
             x = szekek[szek]
         else:
@@ -16,35 +19,49 @@ def foglal(a,sor,szek,c):
     print('Sikeres foglalás!')
     
 def töröl(a,b):
+    no = 0
     for i in range(0,100):
         for j in range(0,40,2):
             if a[i][j] == b[0].upper() and a[i][j + 1] == b[1].upper():
                 a[i][j] = 'X'
                 a[i][j+1] = 'X'
                 print("Foglalás törölve!")
+                no += 1
                 break
-    print("Nincs folgalás ilyen monogrammal!")
+    if no == 0:
+        print("Nincs folgalás ilyen monogrammal!")
 
 def szabad(a):
-    ls = []
+    print('Szabad székek:')
     for i in range(0,100):
         szek = 1
-        ls.append('{}. sor'.format(i+1))
+        print('{}. sor: '.format(i+1),end='')
         for j in range (0,40,2):
             if a[i][j] == 'X':
-                ls.append(szek)
+                print(szek,end=' ')
             szek += 1
-    return ls
+        print('\n')
 
 def keres(a,b):
     szekek = {0:1, 2:2, 4:3, 6:4, 8:5, 10:6, 12:7, 14:8, 16:8, 18:10, 20:11, 22:12, 24:13, 26:14, 28:15, 30:16, 32:17, 34:18, 36:19, 38:20}
+    no = 0
     for i in range(0,100):
         for j in range(0,40,2):
             if a[i][j] == b[0].upper() and a[i][j + 1] == b[1].upper():
                 x = szekek.get(j)
                 print('Az ön foglalása a(z) {}. sor {}. szék'.format(i+1,x))
+                no += 1
                 break
-    print('Ilyen monogrammal nincs foglalás!')
+    if no == 0:
+        print('Ilyen monogrammal nincs foglalás!')
+    
+def vane(a,b):
+    
+    for i in range(0,100):
+        for j in range(0,40,2):
+            if a[i][j] == b[0].upper() and a[i][j + 1] == b[1].upper():
+                return True
+    return False
     
 
 #mozi = open('mozi.txt','W')
@@ -58,27 +75,45 @@ while 1:
             tev = input(str('Mit szeretne csinálni?\nFoglal(F), Töröl(T), Módosít(M), Megtekinti a foglalást(C), Kilép(X)\n'))
             
             if tev.upper() == 'F':
-                #print('Szabad helyek:\n{}'.format(szabad(mozi)))
                 sor = int(input(str('Adja meg a sor számát: ')))
                 szek = int(input(str('Adja meg a foglni kívánt szék számát: ')))
                 mon = input(str('Adja meg a monogramját szóközök nélkül: '))
+                if sor > 100 or sor < 1 or szek > 40 or szek < 1 or len(mon) != 2:
+                    print('Nem létező széket adott meg vagy hibás a monogramm formátuma!')
+                    break
+                elif vane(mozi,mon):
+                    print("Ezzel a monogrammal már van foglalás!")
+                    break
                 foglal(mozi,sor,szek,mon)
             elif tev.upper() == 'M':
                 mon = input(str('Adja meg a monogramját szóközök nélkül: '))
                 töröl(mozi,mon)
-                #print('Szabad helyek:\n{}'.format(szabad(mozi)))
                 sor = int(input(str('Adja meg a sor számát: ')))
                 szek = int(input(str('Adja meg a foglni kívánt szék számát: ')))
+                if sor > 100 or sor < 1 or szek > 40 or szek < 1 or len(mon) != 2:
+                    print('Nem létező széket adott meg vagy hibás a monogramm formátuma!')
+                    break
+                elif vane(mozi,mon):
+                    print("Ezzel a monogrammal már van foglalás!")
+                    break
                 foglal(mozi,sor,szek,mon)
             elif tev.upper() == 'C':
                 mon = input(str('Adja meg a monogramját szóközök nélkül: '))
+                if len(mon) != 2:
+                    print('Hibás a monogramm formátuma!')
+                    break
                 keres(mozi,mon)
             elif tev.upper() == 'T':
                 mon = input(str('Adja meg a monogramját szóközök nélkül: '))
+                if len(mon) != 2:
+                    print('Hibás a monogramm formátuma!')
+                    break
                 töröl(mozi,mon)
             elif tev.upper() == 'X':
                 break
     except ValueError:
         print("Helytelen érték!")
+    except KeyError:
+        print("Nem létező helyet adott meg!")
     if tev.upper() == 'X':
         break
