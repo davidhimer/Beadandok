@@ -8,7 +8,9 @@ def biggestpow(n):
             i += 1
             ls = [i,a]
     return ls
-    
-szam = int(input(str('Adja meg a számot: ')))
 
-print('A(z) {} legnagyobb egymilliónál kisebb hatványa és értéke a(z) :{}'.format(szam,biggestpow(szam)))
+try:   
+    szam = int(input(str('Adja meg a számot: ')))
+    print('A(z) {} legnagyobb egymilliónál kisebb hatványa és értéke a(z) :{}'.format(szam,biggestpow(szam)))
+except ValueError:
+    print('Nem számot adott meg!')
