@@ -12,15 +12,19 @@ def todec(n):
         c = c / 2
     return int(dec)
     
-be = input(str('Adja meg a számokat: '))
+be = input(str('Adja meg a kettes számrendszerbeli számokat vesszővel elválasztva: '))
     
 ls = []
-
-szamokbin = be.split(',')
-
-
-for n in range(0,len(szamokbin)):
-    if dev3(todec(szamokbin[n])):
-        ls.append(str(todec(szamokbin[n])) + ' : ' + szamokbin[n])
-
-print(ls)
+no = 0
+for i in range(0,len(be)):
+    if be[i] != ',' and be[i] != '0' and be[i] != '1':
+        no += 1
+if no != 0:
+    print('Nem kettes számrendszer beli számokat adott meg vagy nem jó az elválasztásuk!')
+else:
+    szamokbin = be.split(',')
+    
+    for n in range(0,len(szamokbin)):
+        if dev3(todec(szamokbin[n])):
+            ls.append(str(todec(szamokbin[n])) + ' : ' + szamokbin[n])
+    print(ls)
