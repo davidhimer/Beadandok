@@ -62,15 +62,12 @@ def vane(a,b):
             if a[i][j] == b[0].upper() and a[i][j + 1] == b[1].upper():
                 return True
     return False
-    
-
-#mozi = open('mozi.txt','W')
 
 mozi = np.full((100,40), 'X')
 
-while 1:
+while True:
     try:
-        while 1:
+        while True:
             
             tev = input(str('Mit szeretne csinálni?\nFoglal(F), Töröl(T), Módosít(M), Megtekinti a foglalást(C), Kilép(X)\n'))
             
@@ -113,7 +110,5 @@ while 1:
                 break
     except ValueError:
         print("Helytelen érték!")
-    except KeyError:
-        print("Nem létező helyet adott meg!")
     if tev.upper() == 'X':
         break
